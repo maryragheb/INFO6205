@@ -86,4 +86,12 @@ public class RandomWalkTest {
         for (int i = 0; i < 5000; i++)
             assertNotSame(0, RandomWalk.randomWalkMulti(1, 1));
     }
+
+    @Test // Determine d,m relation
+    public void testRandomWalkRelation() {
+        for (int m = 0; m <= 1000; m+=10) {
+            double rw = RandomWalk.randomWalkMulti(m, 10);
+            System.out.println(m + "\t" + rw);
+        }
+    }
 }
