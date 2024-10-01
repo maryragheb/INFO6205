@@ -1,5 +1,6 @@
 package edu.neu.coe.info6205.threesum;
 
+import edu.neu.coe.info6205.util.Stopwatch;
 import org.junit.Ignore;
 import org.junit.Test;
 
@@ -159,6 +160,23 @@ public class ThreeSumTest {
         Triple[] triplesQuadratic = target.getTriples();
         Triple[] triplesCubic = new ThreeSumCubic(ints).getTriples();
         assertEquals(triplesCubic.length, triplesQuadratic.length);
+    }
+
+    @Ignore // Test to output timing observations
+    public void testTimeGetTriples() {
+        System.out.println("N \t Quad Time \t Cubic Time");
+        for (int i = 50; i <= 10000; i*=2) {
+            Supplier<int[]> intsSupplier = new Source(1500, 1000).intsSupplier(10);
+            int[] ints = intsSupplier.get();
+            ThreeSum target = new ThreeSumQuadraticWithCalipers(ints);
+            Stopwatch stopwatch = new Stopwatch();
+            Triple[] triplesQuadratic = target.getTriples();
+            long time = stopwatch.lap();
+            Stopwatch stopwatchCubic = new Stopwatch();
+            Triple[] triplesCubic = new ThreeSumCubic(ints).getTriples();
+            long cubictime = stopwatchCubic.lap();
+            System.out.println(i + "\t" + time + "\t" + cubictime);
+        }
     }
 
 }
