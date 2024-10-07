@@ -42,6 +42,13 @@ public class InsertionSortBasic<S> {
      */
     private void insert(int from, int i, S[] a) {
         // TO BE IMPLEMENTED  : implement inner loop of insertion sort using comparator
+        S comp = a[i];
+        while (this.comparator.compare(comp, a[from]) > 0 && from < i) {
+            from++;
+        }
+        for (int j = from; j < i; j++) {
+            swap (a, j, i);
+        }
         // END SOLUTION
     }
 
