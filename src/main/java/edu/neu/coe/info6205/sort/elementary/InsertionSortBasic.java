@@ -41,7 +41,6 @@ public class InsertionSortBasic<S> {
      * @param a    the (sorted) array into which the transitional element should be moved.
      */
     private void insert(int from, int i, S[] a) {
-        // TO BE IMPLEMENTED  : implement inner loop of insertion sort using comparator
         S comp = a[i];
         while (this.comparator.compare(comp, a[from]) > 0 && from < i) {
             from++;
@@ -49,7 +48,6 @@ public class InsertionSortBasic<S> {
         for (int j = from; j < i; j++) {
             swap (a, j, i);
         }
-        // END SOLUTION
     }
 
     private void swap(Object[] a, int j, int i) {
@@ -59,4 +57,5 @@ public class InsertionSortBasic<S> {
     }
 
     private final Comparator<S> comparator;
+
 }
