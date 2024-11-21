@@ -5,6 +5,7 @@ import edu.neu.coe.info6205.sort.SortException;
 import edu.neu.coe.info6205.sort.SortWithComparableHelper;
 import edu.neu.coe.info6205.sort.elementary.InsertionSort;
 import edu.neu.coe.info6205.util.Config;
+import scala.tools.nsc.doc.html.HtmlTags;
 
 import java.util.Arrays;
 
@@ -72,9 +73,25 @@ public class MergeSort<X extends Comparable<X>> extends SortWithComparableHelper
             insertionSort.sort(a, from, to);
             return;
         }
-
         // TO BE IMPLEMENTED  : implement merge sort with insurance and no-copy optimizations
-throw new RuntimeException("implementation missing");
+        int mid = from + (to-from) /2;
+        if(noCopy) {
+            sort(aux, a, from, mid);
+            sort(aux, a, mid, to);
+            if(insurance && helper.less(aux, mid-1, mid)) {
+                if (to-from >= 0) {
+                    System.arraycopy(aux, from, a, from, to-from);
+                }
+                return;
+            }
+            merge(aux, a, from, mid, to);
+        } else {
+            sort(a, aux, from, mid);
+            sort(a, aux, mid, to);
+            if (insurance && helper.less(a[mid-1], a[mid])) return;
+            if (to - from >= 0) System.arraycopy(a, from, aux, from, to-from);
+            merge(aux, a, from, mid, to);
+        }
     }
 
     // CONSIDER combine with MergeSortBasic, perhaps.
